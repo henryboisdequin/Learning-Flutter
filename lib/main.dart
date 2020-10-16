@@ -17,36 +17,35 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Flutter is Awesome!"),
       ),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          width: 100,
-          height: 100,
-          // mostly always use antiAlias
-          clipBehavior: Clip.antiAlias,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
+      body: Container(
+        color: Colors.teal,
+        alignment: Alignment.center,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+            Container(
+            padding: const EdgeInsets.all(8),
+            width: 100,
+            height: 100,
+            alignment: Alignment.center,
             color: Colors.red,
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(colors: [
-              Colors.pink,
-              Colors.yellow,
-            ]),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5,
-              )],
-            ),
-          child: Text(
-            "I am a box...",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            width: 100,
+            height: 100,
+            alignment: Alignment.center,
+            color: Colors.yellow,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            width: 100,
+            height: 100,
+            alignment: Alignment.center,
+            color: Colors.purple,
+          ),
+          ],
         ),
       ),
     );
