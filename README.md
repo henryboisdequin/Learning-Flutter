@@ -1,6 +1,6 @@
 # myFlutterApp
 
-A new Flutter project.
+A new Flutter project. This is a Flutter and Git learning space.
 
 ## Getting Started
 
