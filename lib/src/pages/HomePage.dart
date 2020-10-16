@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:myFlutterApp/src/components/drawer.dart';
-import 'package:myFlutterApp/src/components/homeCard.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,13 +9,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String myText = "Your Input";
-  TextEditingController _textController = TextEditingController();
+  // String myText = "Your Input";
+  // TextEditingController _textController = TextEditingController();
+
+  String url = "https://jsonplaceholder.typicode.com/photos";
+  var data;
 
   // Component did mount in react
   @override
   void initState() {
     super.initState();
+    fetchData();
+  }
+
+  // promise = future
+  fetchData() async {
+    var res = await http.get(url);
+    data = jsonDecode(res.body);
+    setState(() {});
   }
 
   // Component unmounts in flutter
@@ -30,18 +42,23 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Flutter is Awesome!"),
       ),
-      body: Center(
-          child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child:
-                    HomeCard(myText: myText, textController: _textController),
-              ))),
+      body: data != null ? ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(data[index]["title"]),
+            subtitle: Text("ID: ${data[index]["id"]}"),
+            leading: Image.network(data[index]["url"]),
+          );
+        },
+        itemCount: data.length,
+      ) : Center(
+        child: CircularProgressIndicator(),
+      ),
       drawer: HomeDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          myText = _textController.text;
-          setState(() {});
+          // myText = _textController.text;
+          // setState(() {});
         }, // empty function in dart
         child: Icon(Icons.done),
       ),
