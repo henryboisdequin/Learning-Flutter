@@ -1,9 +1,12 @@
 import "package:flutter/material.dart";
-import 'package:myFlutterApp/src/components/drawer.dart';
+import '../components/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'LoginPage.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = "/home";
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -42,26 +45,33 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Flutter is Awesome!"),
       ),
-      body: data != null ? GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(data[index]["title"]),
-            subtitle: Text("ID: ${data[index]["id"]}"),
-            leading: Image.network(data[index]["url"]),
-          );
-        },
-        itemCount: data.length,
-      ) : Center(
-        child: CircularProgressIndicator(),
-      ),
+      body: data != null
+          ? ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(data[index]["title"]),
+                  subtitle: Text("ID: ${data[index]["id"]}"),
+                  leading: Image.network(data[index]["url"]),
+                );
+              },
+              itemCount: data.length,
+            )
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
       drawer: HomeDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // myText = _textController.text;
           // setState(() {});
         }, // empty function in dart
-        child: Icon(Icons.done),
+        child: IconButton(
+          icon: Icon(Icons.login),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
