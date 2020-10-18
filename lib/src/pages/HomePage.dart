@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
-  // Component unmounts in flutter
+  // Component did unmount in react
   @override
   void dispose() {
     super.dispose();
@@ -42,7 +42,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Flutter is Awesome!"),
       ),
-      body: data != null ? ListView.builder(
+      body: data != null ? GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(data[index]["title"]),
