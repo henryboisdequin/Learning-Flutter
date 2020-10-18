@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:myFlutterApp/src/utils/constants.dart';
 import '../components/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -44,6 +45,15 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text("Flutter is Awesome!"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              Constants.prefs.setBool("loggedIn", false);
+              Navigator.pushReplacementNamed(context, LoginPage.routeName);
+            },
+          )
+        ],
       ),
       body: data != null
           ? ListView.builder(
