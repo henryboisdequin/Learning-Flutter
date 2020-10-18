@@ -70,10 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                                   //     builder: (context) => HomePage());
                                   // Navigator.pushReplacement(context, route);
                                   Navigator.pushNamed(
-                                    context, HomePage.routeName
-                                  );
-                                //   Navigator.pushReplacementNamed(
-                                //       context, HomePage.routeName);
+                                      context, HomePage.routeName);
+                                  //   Navigator.pushReplacementNamed(
+                                  //       context, HomePage.routeName);
                                 },
                                 child: Text("Login"),
                                 color: Colors.orange,
